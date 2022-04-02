@@ -10,6 +10,7 @@ namespace DiningRoomContracts.StoragesContracts
 {
     public interface IWorkerStorage
     {
+        WorkerBindingModel GetAutorizedWorker();
         bool Registered(WorkerBindingModel model);
         void Insert(WorkerBindingModel model);
         bool Login(WorkerBindingModel model);

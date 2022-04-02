@@ -15,6 +15,8 @@ using DiningRoomBusinessLogic.BusinessLogics;
 using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using DiningRoomContracts.ViewModels;
+using DiningRoomContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,10 +25,11 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class LunchesWindow : Window
     {
-        LunchLogic lunchLogic = new LunchLogic(new LunchStorage(), new OrderStorage());
-        public LunchesWindow()
+        private readonly ILunchLogic lunchLogic;
+        public LunchesWindow(ILunchLogic lunchLogic)
         {
             InitializeComponent();
+            this.lunchLogic = lunchLogic;
         }
         private void LoadData()
         {
@@ -50,7 +53,7 @@ namespace DiningRoomHornsHooves
         }
         private void CreateCutleryClick(object sender, RoutedEventArgs e)
         {
-            LunchWindow lunchWindow = new LunchWindow();
+            LunchWindow lunchWindow = App.Container.Resolve<LunchWindow>();
             lunchWindow.ShowDialog();
             LoadData();
         }
@@ -73,14 +76,14 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedLunchId = ((LunchViewModel)LunchesData.SelectedItem).Id;
-            LunchWindow lunchWindow = new LunchWindow();
+            LunchWindow lunchWindow = App.Container.Resolve<LunchWindow>();
             lunchWindow.Id = selecctedLunchId;
             lunchWindow.ShowDialog();
             LoadData();
         }
         private void BindingClick(object sender, RoutedEventArgs e)
         {
-            BindOrderLunchesWindow bindOrderLunchesWindow = new BindOrderLunchesWindow();
+            BindOrderLunchesWindow bindOrderLunchesWindow = App.Container.Resolve<BindOrderLunchesWindow>();
             bindOrderLunchesWindow.ShowDialog();
         }
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

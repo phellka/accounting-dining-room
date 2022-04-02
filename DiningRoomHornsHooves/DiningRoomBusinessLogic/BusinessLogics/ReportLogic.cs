@@ -19,16 +19,18 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         private readonly ICutleryStorage cutleryStorage;
         private readonly ICookStorage cookStorage;
         private readonly IProductStorage productStorage;
+        private readonly IWorkerStorage workerStorage;
         private readonly AbstractSaveToPdf saveToPdf;
         private readonly AbstractSaveToWord saveToWord;
         private readonly AbstractSaveToExcel saveToExcel;
         public ReportLogic(ILunchStorage lunchStorage, ICutleryStorage cutleryStorage, ICookStorage cookStorage, IProductStorage productStorage,
-            AbstractSaveToPdf saveToPdf, AbstractSaveToWord saveToWord, AbstractSaveToExcel saveToExcel)
+            IWorkerStorage workerStorage, AbstractSaveToPdf saveToPdf, AbstractSaveToWord saveToWord, AbstractSaveToExcel saveToExcel)
         {
             this.cookStorage = cookStorage;
             this.cutleryStorage = cutleryStorage;
             this.lunchStorage = lunchStorage;
             this.productStorage = productStorage;
+            this.workerStorage = workerStorage;
             this.saveToPdf = saveToPdf;
             this.saveToWord = saveToWord;
             this.saveToExcel = saveToExcel;
@@ -67,6 +69,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         }
         public void saveLunchesToPdfFile(ReportBindingModel model)
         {
+            var worker = workerStorage.GetAutorizedWorker();
             saveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,

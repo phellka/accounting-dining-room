@@ -46,5 +46,29 @@ namespace DiningRoomDatabaseImplement.Implements
             AutorizedWorker = model.Login;
             return true;
         }
+        public WorkerBindingModel GetAutorizedWorker()
+        {
+            return GetElement(new WorkerBindingModel() { Login = AutorizedWorker });
+        }
+        public WorkerBindingModel GetElement(WorkerBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using var context = new DiningRoomDatabase();
+            var worker = context.Workers.FirstOrDefault(rec => rec.Login == model.Login);
+            return worker != null ? CreateModel(worker) : null;
+        }
+        public WorkerBindingModel CreateModel(Worker worker)
+        {
+            return new WorkerBindingModel()
+            {
+                Email = worker.Email,
+                Login = worker.Login,
+                Password = worker.Password,
+                Name = worker.Name
+            };
+        }
     }
 }

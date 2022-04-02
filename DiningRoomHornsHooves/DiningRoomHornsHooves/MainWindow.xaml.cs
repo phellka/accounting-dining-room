@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomBusinessLogic.OfficePackage.Implements;
+using DiningRoomContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,11 +23,13 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class MainWindow : Window
     {
-        CookLogic cookLogic = new CookLogic(new CookStorage());
-        ProductLogic productLogic = new ProductLogic(new ProductStorage(), new CookStorage());
-        public MainWindow()
+        private readonly ICookLogic cookLogic;
+        private readonly IProductLogic productLogic;
+        public MainWindow(ICookLogic cookLogic, IProductLogic productLogic)
         {
             InitializeComponent();
+            this.cookLogic = cookLogic;
+            this.productLogic = productLogic;
         }
         private void CreateCookClick(object sender, RoutedEventArgs e)
         {
@@ -43,29 +45,27 @@ namespace DiningRoomHornsHooves
         }
         private void OrdersClick(object sender, RoutedEventArgs e)
         {
-            OrdersWindow ordersWindow = new OrdersWindow();
+            OrdersWindow ordersWindow = App.Container.Resolve<OrdersWindow>();
             ordersWindow.ShowDialog();
         }
         private void CutleriesClick(object sender, RoutedEventArgs e)
         {
-            CutleriesWindow cutleriesWindow = new CutleriesWindow();
+            CutleriesWindow cutleriesWindow = App.Container.Resolve<CutleriesWindow>();
             cutleriesWindow.ShowDialog();
         }
         private void LunchesClick(object sender, RoutedEventArgs e)
         {
-            LunchesWindow lunchesWindow = new LunchesWindow();
+            LunchesWindow lunchesWindow = App.Container.Resolve<LunchesWindow>();
             lunchesWindow.ShowDialog();
         }
         private void ReportLunchesClick(object sender, RoutedEventArgs e)
         {
-            ReportLunchesWindow reportLunchesWindow = new ReportLunchesWindow(
-                new ReportLogic(new LunchStorage(), new CutleryStorage(), new CookStorage(), new ProductStorage(), new SaveToPdf(), new SaveToWord(), new SaveToExcel()));
+            ReportLunchesWindow reportLunchesWindow = App.Container.Resolve<ReportLunchesWindow>();
             reportLunchesWindow.ShowDialog();
         }
         private void ReportCooksbyLunchesClick(object sender, RoutedEventArgs e)
         {
-            ReportCooksByLanchesWindow reportCooksByLanchesWindow = new ReportCooksByLanchesWindow(new LunchStorage(), 
-                new ReportLogic(new LunchStorage(), new CutleryStorage(), new CookStorage(), new ProductStorage(), new SaveToPdf(), new SaveToWord(), new SaveToExcel()));
+            ReportCooksByLanchesWindow reportCooksByLanchesWindow = App.Container.Resolve<ReportCooksByLanchesWindow>();
             reportCooksByLanchesWindow.ShowDialog();
         }
     }

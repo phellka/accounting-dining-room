@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using DiningRoomBusinessLogic.BusinessLogics;
 using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
+using DiningRoomContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -22,10 +24,11 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        WorkerLogic workerLogic = new WorkerLogic(new WorkerStorage());
-        public AuthorizationWindow()
+        private readonly IWorkerLogic workerLogic;
+        public AuthorizationWindow(IWorkerLogic workerLogic)
         {
             InitializeComponent();
+            this.workerLogic = workerLogic;
         }
         private void CancelClick(object sender, RoutedEventArgs e)
         {
@@ -33,7 +36,7 @@ namespace DiningRoomHornsHooves
         }
         private void RegistrationClick(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
+            RegistrationWindow registrationWindow = App.Container.Resolve<RegistrationWindow>();
             registrationWindow.ShowDialog();
         }
         private void AutorizedClick(object sender, RoutedEventArgs e)
@@ -47,7 +50,7 @@ namespace DiningRoomHornsHooves
             }
             if (workerLogic.Login(new WorkerBindingModel { Login = login, Password = password}))
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = App.Container.Resolve<MainWindow>();
                 mainWindow.Show();
                 this.Close();
             }

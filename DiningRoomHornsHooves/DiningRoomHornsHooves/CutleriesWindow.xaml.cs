@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using DiningRoomContracts.ViewModels;
+using DiningRoomContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,10 +23,11 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class CutleriesWindow : Window
     {
-        CutleryLogic cutleryLogic = new CutleryLogic(new CutleryStorage());
-        public CutleriesWindow()
+        private readonly ICutleryLogic cutleryLogic;
+        public CutleriesWindow( ICutleryLogic cutleryLogic)
         {
             InitializeComponent();
+            this.cutleryLogic = cutleryLogic;
         }
         private void LoadData()
         {
@@ -48,7 +49,7 @@ namespace DiningRoomHornsHooves
         }
         private void CreateCutleryClick(object sender, RoutedEventArgs e)
         {
-            CutleryWindow cutleryWindow = new CutleryWindow();
+            CutleryWindow cutleryWindow = App.Container.Resolve<CutleryWindow>();
             cutleryWindow.ShowDialog();
             LoadData();
         }
@@ -71,7 +72,7 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedCutleryId = ((CutleryViewModel)CutleriesData.SelectedItem).Id;
-            CutleryWindow cutleryWindow = new CutleryWindow();
+            CutleryWindow cutleryWindow = App.Container.Resolve<CutleryWindow>();
             cutleryWindow.Id = selecctedCutleryId;
             cutleryWindow.ShowDialog();
             LoadData();

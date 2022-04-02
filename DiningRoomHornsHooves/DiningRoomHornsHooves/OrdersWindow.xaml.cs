@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using DiningRoomContracts.ViewModels;
+using DiningRoomContracts.BusinessLogicsContracts;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,10 +23,11 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class OrdersWindow : Window
     {
-        OrderLogic orderLogic = new OrderLogic(new OrderStorage());
-        public OrdersWindow()
+        private readonly IOrderLogic orderLogic;
+        public OrdersWindow(IOrderLogic orderLogic)
         {
             InitializeComponent();
+            this.orderLogic = orderLogic;
 
         }
         private void LoadData()
@@ -48,7 +49,7 @@ namespace DiningRoomHornsHooves
         }
         private void CreateOrderClick(object sender, RoutedEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow();
+            OrderWindow orderWindow = App.Container.Resolve<OrderWindow>();
             orderWindow.ShowDialog();
             LoadData();
         }
@@ -71,7 +72,7 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedOrderId = ((OrderViewModel)OrdersData.SelectedItem).Id;
-            OrderWindow orderWindow = new OrderWindow();
+            OrderWindow orderWindow = App.Container.Resolve<OrderWindow>();
             orderWindow.Id = selecctedOrderId;
             orderWindow.ShowDialog();
             LoadData();

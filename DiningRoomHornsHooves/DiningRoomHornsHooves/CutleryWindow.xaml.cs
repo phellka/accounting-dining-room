@@ -11,10 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using DiningRoomContracts.ViewModels;
+using DiningRoomContracts.BusinessLogicsContracts;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,13 +22,15 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class CutleryWindow : Window
     {
-        CutleryLogic cutleryLogic = new CutleryLogic(new CutleryStorage());
-        OrderLogic orderLogic = new OrderLogic(new OrderStorage());
+        private readonly ICutleryLogic cutleryLogic;
+        private readonly IOrderLogic orderLogic;
         public int Id { set { id = value; } }
         private int? id;
-        public CutleryWindow()
+        public CutleryWindow(ICutleryLogic cutleryLogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
+            this.cutleryLogic = cutleryLogic;
+            this.orderLogic = orderLogic;
         }
         private void OrderWindowLoad(object sender, RoutedEventArgs e)
         {

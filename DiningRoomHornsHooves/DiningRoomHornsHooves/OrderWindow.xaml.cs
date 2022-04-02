@@ -11,9 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
+using DiningRoomContracts.BusinessLogicsContracts;
 
 
 namespace DiningRoomHornsHooves
@@ -23,12 +22,13 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class OrderWindow : Window
     {
-        OrderLogic orderLogic = new OrderLogic(new OrderStorage());
+        private readonly IOrderLogic orderLogic;
         public int Id { set { id = value; } }
         private int? id;
-        public OrderWindow()
+        public OrderWindow(IOrderLogic orderLogic)
         {
             InitializeComponent();
+            this.orderLogic = orderLogic;
         }
         private void OrderWindowLoad(object sender, RoutedEventArgs e)
         {

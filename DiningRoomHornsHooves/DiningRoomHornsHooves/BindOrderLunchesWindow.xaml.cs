@@ -11,10 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using DiningRoomContracts.ViewModels;
+using DiningRoomContracts.BusinessLogicsContracts;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,11 +22,13 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class BindOrderLunchesWindow : Window
     {
-        LunchLogic lunchLogic = new LunchLogic(new LunchStorage(), new OrderStorage());
-        OrderLogic orderLogic = new OrderLogic(new OrderStorage());
-        public BindOrderLunchesWindow()
+        private readonly ILunchLogic lunchLogic;
+        private readonly IOrderLogic orderLogic;
+        public BindOrderLunchesWindow(ILunchLogic lunchLogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
+            this.lunchLogic = lunchLogic;
+            this.orderLogic = orderLogic;
         }
         private void LoadData()
         {

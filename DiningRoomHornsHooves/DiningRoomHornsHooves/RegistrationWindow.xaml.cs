@@ -11,10 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiningRoomBusinessLogic.BusinessLogics;
-using DiningRoomDatabaseImplement.Implements;
 using DiningRoomContracts.BindingModels;
 using System.Text.RegularExpressions;
+using DiningRoomContracts.BusinessLogicsContracts;
 
 namespace DiningRoomHornsHooves
 {
@@ -23,10 +22,11 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        WorkerLogic workerLogic = new WorkerLogic(new WorkerStorage());
-        public RegistrationWindow()
+        private readonly IWorkerLogic workerLogic;
+        public RegistrationWindow(IWorkerLogic workerLogic)
         {
             InitializeComponent();
+            this.workerLogic = workerLogic;
         }
         private void CancelClick(object sender, RoutedEventArgs e)
         {
