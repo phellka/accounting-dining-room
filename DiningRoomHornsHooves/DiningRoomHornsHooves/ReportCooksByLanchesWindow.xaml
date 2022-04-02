@@ -1,0 +1,25 @@
+﻿<Window x:Class="DiningRoomHornsHooves.ReportCooksByLanchesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiningRoomHornsHooves"
+        mc:Ignorable="d"
+        Title="Список поваров" Height="370" Width="320" MinWidth="320" MinHeight="370" Loaded="ReportCooksByLanchesWindowLoaded" Background="CadetBlue">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="10, 10, 10, 0">Выбранные обеды:</TextBlock>
+            <ListBox Name="LunchesListBox" Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" Margin="10" MinHeight="230" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"></ListBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10" Height="30" Width="60" Grid.Column="0" Click="WordClick" Style="{StaticResource NewGameButtonStyle}">Word</Button>
+                <Button Margin="10" Height="30" Width="60" Grid.Column="1" Click="ExcelClick" Style="{StaticResource NewGameButtonStyle}">Excel</Button>
+                <Button Margin="10" Height="30" Width="60" Grid.Column="2" Click="CancelClick" Style="{StaticResource NewGameButtonStyle}">Отмена</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

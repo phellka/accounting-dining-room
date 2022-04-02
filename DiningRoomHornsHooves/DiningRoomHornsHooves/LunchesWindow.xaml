@@ -1,0 +1,28 @@
+﻿<Window x:Class="DiningRoomHornsHooves.LunchesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiningRoomHornsHooves"
+        mc:Ignorable="d"
+        Title="Обеды" Height="400" Width="600" MinHeight="250" MinWidth="350" Loaded="LunchesWindowLoaded" Background="CadetBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="1" Grid.Column="1" Click="CreateCutleryClick"  Margin="10" MinHeight="30" MinWidth="80" Style="{StaticResource NewGameButtonStyle}">Создать</Button>
+        <Button Grid.Row="2" Grid.Column="1" Click="DeleteCutleryClick"  Margin="10" MinHeight="30" MinWidth="80" Style="{StaticResource NewGameButtonStyle}">Удалить</Button>
+        <Button Grid.Row="3" Grid.Column="1" Click="UpdateCutleryClick"  Margin="10" MinHeight="30" MinWidth="80" Style="{StaticResource NewGameButtonStyle}">Изменить</Button>
+        <Button Grid.Row="4" Grid.Column="1" Click="BindingClick"  Margin="10" MinHeight="30" MinWidth="80" Style="{StaticResource NewGameButtonStyle}">Привязка заказов</Button>
+        <DataGrid Name="LunchesData" Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" ColumnWidth="*" IsReadOnly="True" AutoGeneratingColumn="OnAutoGeneratingColumn" Margin="10" ></DataGrid>
+    </Grid>
+</Window>

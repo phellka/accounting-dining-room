@@ -1,0 +1,23 @@
+﻿<Window x:Class="DiningRoomHornsHooves.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiningRoomHornsHooves"
+        mc:Ignorable="d"
+        Title="Программа учета" Height="450" Width="800" Background="CadetBlue">
+    <Grid>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Обеды" Click="LunchesClick"></MenuItem>
+            <MenuItem Header="Заказы" Click="OrdersClick"></MenuItem>
+            <MenuItem Header="Приборы" Click="CutleriesClick"></MenuItem>
+            <MenuItem Header="Получение списка" Click="ReportCooksbyLunchesClick"></MenuItem>
+            <MenuItem Header="Отчет" Click="ReportLunchesClick"></MenuItem>
+            <MenuItem Header="Прочее">
+                <MenuItem Header="Создание повара" Click="CreateCookClick"></MenuItem>
+                <MenuItem Header="Создание продукта" Click="CreateProductClick"></MenuItem>
+                <MenuItem Header="Привязать поваров" Click="CreateProductCooksClick"></MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
