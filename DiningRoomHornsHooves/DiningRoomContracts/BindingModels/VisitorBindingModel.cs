@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiningRoomContracts.BindingModels
 {
-    public class WorkerBindingModel
+    public class VisitorBindingModel
     {
         public string Login { get; set; }
         public string Password { get; set; }

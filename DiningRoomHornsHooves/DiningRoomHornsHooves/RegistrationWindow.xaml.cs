@@ -22,8 +22,8 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        private readonly IWorkerLogic workerLogic;
-        public RegistrationWindow(IWorkerLogic workerLogic)
+        private readonly IVisitorLogic workerLogic;
+        public RegistrationWindow(IVisitorLogic workerLogic)
         {
             InitializeComponent();
             this.workerLogic = workerLogic;
@@ -57,7 +57,7 @@ namespace DiningRoomHornsHooves
             }
             try
             {
-                workerLogic.Create(new WorkerBindingModel { Login = login, Password = password, Email = email, Name = name});
+                workerLogic.Create(new VisitorBindingModel { Login = login, Password = password, Email = email, Name = name});
                 this.Close();
             }
             catch(Exception ex)

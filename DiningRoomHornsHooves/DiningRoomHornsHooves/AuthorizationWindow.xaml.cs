@@ -24,8 +24,8 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        private readonly IWorkerLogic workerLogic;
-        public AuthorizationWindow(IWorkerLogic workerLogic)
+        private readonly IVisitorLogic workerLogic;
+        public AuthorizationWindow(IVisitorLogic workerLogic)
         {
             InitializeComponent();
             this.workerLogic = workerLogic;
@@ -48,7 +48,7 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Для авторизации необходимо ввести логин и пароль");
                 return;
             }
-            if (workerLogic.Login(new WorkerBindingModel { Login = login, Password = password}))
+            if (workerLogic.Login(new VisitorBindingModel { Login = login, Password = password}))
             {
                 MainWindow mainWindow = App.Container.Resolve<MainWindow>();
                 mainWindow.Show();

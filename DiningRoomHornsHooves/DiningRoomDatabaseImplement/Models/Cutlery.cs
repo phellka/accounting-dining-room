@@ -15,8 +15,8 @@ namespace DiningRoomDatabaseImplement.Models
         public String Name { get; set; }
         [Required]
         public int Count { get; set; }
-        public String WorkerLogin { get; set; }
-        public virtual Worker Worker { get; set; }
+        public String VisitorLogin { get; set; }
+        public virtual Visitor Visitor { get; set; }
         public int OrderId { get; set; }
         public virtual Order Order { get; set; }
     }

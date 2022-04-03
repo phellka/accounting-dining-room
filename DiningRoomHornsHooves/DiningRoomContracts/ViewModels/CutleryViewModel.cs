@@ -14,7 +14,7 @@ namespace DiningRoomContracts.ViewModels
         public String Name { get; set; }
         [DisplayName("Количество приборов")]
         public int Count { get; set; }
-        public String WorkerLogin { get; set; }
+        public String VisitorLogin { get; set; }
         public int CulteryOrder { get; set; }
     }
 }

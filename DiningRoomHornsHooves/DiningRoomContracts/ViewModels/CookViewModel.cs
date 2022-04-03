@@ -12,6 +12,6 @@ namespace DiningRoomContracts.ViewModels
         public int Id { get; set; }
         [DisplayName("Имя повара")]
         public string Name { get; set; }
-        public String StorekeeperLogin { get; set; }
+        public String ManagerLogin { get; set; }
     }
 }

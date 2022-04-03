@@ -26,7 +26,7 @@ namespace DiningRoomDatabaseImplement
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCooks> ProductCooks { get; set; }
-        public virtual DbSet<Storekeeper> Storekeepers { get; set; }
-        public virtual DbSet<Worker> Workers { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
+        public virtual DbSet<Visitor> Visitors { get; set; }
     }
 }

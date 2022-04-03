@@ -47,14 +47,14 @@ namespace DiningRoomHornsHooves
             currentContainer.RegisterType<ILunchStorage, LunchStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductStorage, ProductStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IWorkerStorage, WorkerStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IVisitorStorage, VisitorStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ICookLogic, CookLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ICutleryLogic, CutleryLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ILunchLogic, LunchLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductLogic, ProductLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IWorkerLogic, WorkerLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IVisitorLogic, VisitorLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());

@@ -16,7 +16,7 @@ namespace DiningRoomDatabaseImplement.Implements
         public List<CutleryViewModel> GetFullList()
         {
             using var context = new DiningRoomDatabase();
-            return context.Cutleries.Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).Select(CreateModel).ToList();
+            return context.Cutleries.Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).Select(CreateModel).ToList();
         }
         public List<CutleryViewModel> GetFilteredList(CutleryBindingModel model)
         {
@@ -25,7 +25,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 return null;
             }
             using var context = new DiningRoomDatabase();
-            return context.Cutleries.Where(rec => rec.OrderId == model.CulteryOrder && rec.WorkerLogin == WorkerStorage.AutorizedWorker).Select(CreateModel).ToList();
+            return context.Cutleries.Where(rec => rec.OrderId == model.CulteryOrder && rec.VisitorLogin == VisitorStorage.AutorizedWorker).Select(CreateModel).ToList();
         }
         public CutleryViewModel GetElement(CutleryBindingModel model)
         {
@@ -34,7 +34,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 return null;
             }
             using var context = new DiningRoomDatabase();
-            var cutlery = context.Cutleries.Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+            var cutlery = context.Cutleries.Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
             return cutlery != null ? CreateModel(cutlery) : null;
         }
         public void Insert(CutleryBindingModel model)
@@ -47,7 +47,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 {
                     Name = model.Name,
                     Count = model.Count,
-                    WorkerLogin = WorkerStorage.AutorizedWorker,
+                    VisitorLogin = VisitorStorage.AutorizedWorker,
                     OrderId = model.CulteryOrder,
                     Order = context.Orders.FirstOrDefault(rec => rec.Id == model.CulteryOrder)
                 };
@@ -67,7 +67,7 @@ namespace DiningRoomDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                var element = context.Cutleries.Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Cutleries.Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -88,7 +88,7 @@ namespace DiningRoomDatabaseImplement.Implements
         public void Delete(CutleryBindingModel model)
         {
             using var context = new DiningRoomDatabase();
-            Cutlery element = context.Cutleries.Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+            Cutlery element = context.Cutleries.Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.Cutleries.Remove(element);
@@ -106,7 +106,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 Id = cutlery.Id,
                 Name = cutlery.Name,
                 Count = cutlery.Count,
-                WorkerLogin = cutlery.WorkerLogin,
+                VisitorLogin = cutlery.VisitorLogin,
                 CulteryOrder = cutlery.OrderId
             };
         }

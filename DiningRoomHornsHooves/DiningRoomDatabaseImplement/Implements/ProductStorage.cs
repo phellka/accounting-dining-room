@@ -45,7 +45,7 @@ namespace DiningRoomDatabaseImplement.Implements
         {
             Random rng = new Random();
             using var context = new DiningRoomDatabase();
-            context.Products.Add(new Product { Name = ProductNames[rng.Next(100) % 9], Country = ProductCountries[rng.Next(100) % 8], StorekeeperLogin = "SystemStorekeeper" });
+            context.Products.Add(new Product { Name = ProductNames[rng.Next(100) % 9], Country = ProductCountries[rng.Next(100) % 8], ManagerLogin = "SystemStorekeeper" });
             context.SaveChanges();
         }
         public void AddCooks(){
@@ -90,7 +90,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 Id = product.Id,
                 Name = product.Name,
                 Country = product.Country,
-                StorekeeperLogin = product.StorekeeperLogin,
+                ManagerLogin = product.ManagerLogin,
                 ProductCooks = product.ProductCooks.ToDictionary(rec => rec.CookId, rec => rec.Method)
             };
         }

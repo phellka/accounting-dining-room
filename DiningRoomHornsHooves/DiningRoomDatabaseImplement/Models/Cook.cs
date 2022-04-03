@@ -13,8 +13,8 @@ namespace DiningRoomDatabaseImplement.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public String StorekeeperLogin { get; set; }
-        public virtual Storekeeper Storekeeper { get; set; }
+        public String ManagerLogin { get; set; }
+        public virtual Manager Manager { get; set; }
 
         [ForeignKey("CookId")]
         public virtual List<ProductCooks> ProductCooks { get; set; }

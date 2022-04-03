@@ -97,7 +97,7 @@ namespace DiningRoomHornsHooves
                         DataGrid.Items.Add(new itemLucnh() { 
                             dateCreate = elem.DateCreate.ToShortDateString(),
                             weight = elem.Weight.ToString(),
-                            price = elem.price.ToString()
+                            price = elem.Price.ToString()
                         });
                         for (int i = 0; i < Math.Max(elem.Cooks.Count, elem.Cutleries.Count); ++i)
                         {

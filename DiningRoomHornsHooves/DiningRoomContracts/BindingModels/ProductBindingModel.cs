@@ -11,7 +11,7 @@ namespace DiningRoomContracts.BindingModels
         public int? Id { get; set; }
         public String Name { get; set; }
         public String Country { get; set; }
-        public String StorekeeperLogin { get; set; }
+        public String ManagerLogin { get; set; }
         public Dictionary<int, string> ProductCooks { get; set; }
     }
 }

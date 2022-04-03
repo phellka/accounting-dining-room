@@ -10,14 +10,14 @@ using DiningRoomContracts.BindingModels;
 
 namespace DiningRoomBusinessLogic.BusinessLogics
 {
-    public class WorkerLogic : IWorkerLogic
+    public class VisitorLogic : IVisitorLogic
     {
-        private readonly IWorkerStorage workerStorage;
-        public WorkerLogic(IWorkerStorage workerStorage)
+        private readonly IVisitorStorage workerStorage;
+        public VisitorLogic(IVisitorStorage workerStorage)
         {
             this.workerStorage = workerStorage;
         }
-        public void Create(WorkerBindingModel model)
+        public void Create(VisitorBindingModel model)
         {
             if (!workerStorage.Registered(model))
             {
@@ -28,7 +28,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
                 throw new Exception("Работник с таким логином или почтой уже существует");
             }
         }
-        public Boolean Login(WorkerBindingModel model)
+        public Boolean Login(VisitorBindingModel model)
         {
             return workerStorage.Login(model);
         }

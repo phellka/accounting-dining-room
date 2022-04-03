@@ -8,16 +8,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DiningRoomDatabaseImplement.Models
 {
-    public class Storekeeper
+    public class Manager
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
-        [ForeignKey("StorekeeperLogin")]
+        [ForeignKey("ManagerLogin")]
         public virtual List<Product> Products { get; set; }
-        [ForeignKey("StorekeeperLogin")]
+        [ForeignKey("ManagerLogin")]
         public virtual List<Cook> Cooks { get; set; }
     }
 }

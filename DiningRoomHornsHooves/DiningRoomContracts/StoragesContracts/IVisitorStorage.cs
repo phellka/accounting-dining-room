@@ -8,11 +8,11 @@ using DiningRoomContracts.BindingModels;
 
 namespace DiningRoomContracts.StoragesContracts
 {
-    public interface IWorkerStorage
+    public interface IVisitorStorage
     {
-        WorkerBindingModel GetAutorizedWorker();
-        bool Registered(WorkerBindingModel model);
-        void Insert(WorkerBindingModel model);
-        bool Login(WorkerBindingModel model);
+        VisitorBindingModel GetAutorizedWorker();
+        bool Registered(VisitorBindingModel model);
+        void Insert(VisitorBindingModel model);
+        bool Login(VisitorBindingModel model);
     }
 }

@@ -15,8 +15,8 @@ namespace DiningRoomDatabaseImplement.Models
         public int Calorie { get; set; }
         [Required]
         public String Wishes { get; set; }
-        public string WorkerLogin { get; set; }
-        public virtual Worker Worker { get; set; }
+        public string VisitorLogin { get; set; }
+        public virtual Visitor Visitor { get; set; }
         [ForeignKey("OrderId")]
         public virtual List<LunchOrders> LunchOrders { get; set; }
     }

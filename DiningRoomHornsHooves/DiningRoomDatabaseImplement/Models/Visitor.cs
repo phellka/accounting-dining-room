@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DiningRoomDatabaseImplement.Models
 {
-    public class Worker
+    public class Visitor
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -19,11 +19,11 @@ namespace DiningRoomDatabaseImplement.Models
         public string Email { get; set; }
         [Required]
         public string Name { get; set; }
-        [ForeignKey("WorkerLogin")]
+        [ForeignKey("VisitorLogin")]
         public virtual List<Order> Orders { get; set; }
-        [ForeignKey("WorkerLogin")]
+        [ForeignKey("VisitorLogin")]
         public virtual List<Lunch> Lunches { get; set; }
-        [ForeignKey("WorkerLogin")]
+        [ForeignKey("VisitorLogin")]
         public virtual List<Cutlery> Cutleries { get; set; }
     }
 }

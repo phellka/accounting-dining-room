@@ -10,7 +10,7 @@ namespace DiningRoomContracts.ViewModels
     {
         public DateTime DateCreate { get; set; }
         public int Weight { get; set; }
-        public int price { get; set; }
+        public int Price { get; set; }
         public List<CutleryViewModel> Cutleries { get; set; }
         public List<CookViewModel> Cooks { get; set; }
     }

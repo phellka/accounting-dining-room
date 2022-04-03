@@ -8,9 +8,9 @@ using DiningRoomContracts.BindingModels;
 
 namespace DiningRoomContracts.BusinessLogicsContracts
 {
-    public interface IWorkerLogic
+    public interface IVisitorLogic
     {
-        void Create(WorkerBindingModel model);
-        bool Login(WorkerBindingModel model);
+        void Create(VisitorBindingModel model);
+        bool Login(VisitorBindingModel model);
     }
 }

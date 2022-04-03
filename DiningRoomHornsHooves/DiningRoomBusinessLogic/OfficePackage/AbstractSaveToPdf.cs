@@ -33,7 +33,7 @@ namespace DiningRoomBusinessLogic.OfficePackage
             {
                 CreateRow(new PdfRowParameters
                 {
-                    Texts = new List<string> { lunch.DateCreate.ToShortDateString(), lunch.price.ToString(), lunch.Weight.ToString(), "", "", ""},
+                    Texts = new List<string> { lunch.DateCreate.ToShortDateString(), lunch.Price.ToString(), lunch.Weight.ToString(), "", "", ""},
                     Style = "Normal",
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });

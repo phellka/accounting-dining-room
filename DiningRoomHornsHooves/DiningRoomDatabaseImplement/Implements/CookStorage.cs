@@ -41,7 +41,7 @@ namespace DiningRoomDatabaseImplement.Implements
         {
             using var context = new DiningRoomDatabase();
             string newName = GenerateName();
-            context.Cooks.Add(new Cook { Name = newName, StorekeeperLogin = "SystemStorekeeper"});
+            context.Cooks.Add(new Cook { Name = newName, ManagerLogin = "SystemStorekeeper"});
             context.SaveChanges();
         }
         private static CookViewModel CreateModel(Cook cook)
@@ -50,7 +50,7 @@ namespace DiningRoomDatabaseImplement.Implements
             {
                 Id = cook.Id,
                 Name = cook.Name,
-                StorekeeperLogin = cook.StorekeeperLogin
+                ManagerLogin = cook.ManagerLogin
             };
         }
         public static string GenerateName()

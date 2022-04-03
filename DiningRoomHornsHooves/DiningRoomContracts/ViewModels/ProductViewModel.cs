@@ -14,7 +14,7 @@ namespace DiningRoomContracts.ViewModels
         public String Name { get; set; }
         [DisplayName("Страна происхождения")]
         public String Country { get; set; }
-        public String StorekeeperLogin { get; set; }
+        public String ManagerLogin { get; set; }
         public Dictionary<int, string> ProductCooks { get; set; }
         override
         public string ToString()

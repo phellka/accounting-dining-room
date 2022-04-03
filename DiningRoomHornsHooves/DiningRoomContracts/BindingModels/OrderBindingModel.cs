@@ -11,6 +11,6 @@ namespace DiningRoomContracts.BindingModels
         public int? Id { get; set; }
         public int Calorie { get; set; }
         public String Wishes { get; set; }
-        public string WorkerLogin { get; set; }
+        public string VisitorLogin { get; set; }
     }
 }

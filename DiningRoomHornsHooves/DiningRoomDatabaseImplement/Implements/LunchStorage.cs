@@ -16,7 +16,7 @@ namespace DiningRoomDatabaseImplement.Implements
         public List<LunchViewModel> GetFullList()
         {
             using var context = new DiningRoomDatabase();
-            return context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).Select(CreateModel).ToList();
+            return context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).Select(CreateModel).ToList();
         }
         public List<LunchViewModel> GetFilteredList(LunchBindingModel model)
         {
@@ -25,8 +25,8 @@ namespace DiningRoomDatabaseImplement.Implements
                 return null;
             }
             using var context = new DiningRoomDatabase();
-            return context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.Id == model.Id && rec.WorkerLogin == WorkerStorage.AutorizedWorker ||
-                rec.Date > model.after && rec.Date < model.before && rec.WorkerLogin == WorkerStorage.AutorizedWorker).Select(CreateModel).ToList();
+            return context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.Id == model.Id && rec.VisitorLogin == VisitorStorage.AutorizedWorker ||
+                rec.Date > model.after && rec.Date < model.before && rec.VisitorLogin == VisitorStorage.AutorizedWorker).Select(CreateModel).ToList();
         }
         public LunchViewModel GetElement(LunchBindingModel model)
         {
@@ -35,7 +35,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 return null;
             }
             using var context = new DiningRoomDatabase();
-            var lunch = context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+            var lunch = context.Lunches.Include(rec => rec.LunchProducts).Include(rec => rec.LunchOrders).Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
             return lunch != null ? CreateModel(lunch) : null;
         }
         public void Insert(LunchBindingModel model)
@@ -49,7 +49,7 @@ namespace DiningRoomDatabaseImplement.Implements
                     Price = model.Price,
                     Date = model.Date,
                     Weight = model.Weight,
-                    WorkerLogin = WorkerStorage.AutorizedWorker
+                    VisitorLogin = VisitorStorage.AutorizedWorker
                 };
                 context.Lunches.Add(lunch);
                 context.SaveChanges();
@@ -68,7 +68,7 @@ namespace DiningRoomDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                var element = context.Lunches.Include(rec => rec.LunchProducts).Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Lunches.Include(rec => rec.LunchProducts).Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -86,7 +86,7 @@ namespace DiningRoomDatabaseImplement.Implements
         public void Delete(LunchBindingModel model)
         {
             using var context = new DiningRoomDatabase();
-            Lunch element = context.Lunches.Include(rec => rec.LunchProducts).Where(rec => rec.WorkerLogin == WorkerStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
+            Lunch element = context.Lunches.Include(rec => rec.LunchProducts).Where(rec => rec.VisitorLogin == VisitorStorage.AutorizedWorker).FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.Lunches.Remove(element);
@@ -159,7 +159,7 @@ namespace DiningRoomDatabaseImplement.Implements
                 Date = lunch.Date,
                 Price = lunch.Price,
                 Weight = lunch.Weight,
-                WorkerLogin = lunch.WorkerLogin,
+                VisitorLogin = lunch.VisitorLogin,
                 LunchProduts = lunch.LunchProducts.ToDictionary(rec => rec.ProductId, rec => rec.ProductCount),
                 LunchOrders = lunch.LunchOrders.ToDictionary(rec => rec.OrderId, rec => rec.OrderCount)
             };

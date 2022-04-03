@@ -19,12 +19,12 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         private readonly ICutleryStorage cutleryStorage;
         private readonly ICookStorage cookStorage;
         private readonly IProductStorage productStorage;
-        private readonly IWorkerStorage workerStorage;
+        private readonly IVisitorStorage workerStorage;
         private readonly AbstractSaveToPdf saveToPdf;
         private readonly AbstractSaveToWord saveToWord;
         private readonly AbstractSaveToExcel saveToExcel;
         public ReportLogic(ILunchStorage lunchStorage, ICutleryStorage cutleryStorage, ICookStorage cookStorage, IProductStorage productStorage,
-            IWorkerStorage workerStorage, AbstractSaveToPdf saveToPdf, AbstractSaveToWord saveToWord, AbstractSaveToExcel saveToExcel)
+            IVisitorStorage workerStorage, AbstractSaveToPdf saveToPdf, AbstractSaveToWord saveToWord, AbstractSaveToExcel saveToExcel)
         {
             this.cookStorage = cookStorage;
             this.cutleryStorage = cutleryStorage;
@@ -48,7 +48,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
                 var record = new ReportLunchesPCView
                 {
                     DateCreate = lunch.Date,
-                    price = lunch.Price,
+                    Price = lunch.Price,
                     Weight = lunch.Weight,
                     Cooks = new List<CookViewModel>(),
                     Cutleries = new List<CutleryViewModel>()

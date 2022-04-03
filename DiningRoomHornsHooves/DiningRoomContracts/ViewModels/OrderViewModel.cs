@@ -14,7 +14,7 @@ namespace DiningRoomContracts.ViewModels
         public int Calorie { get; set; }
         [DisplayName("Пожелания к заказу")]
         public String Wishes { get; set; }
-        public string WorkerLogin { get; set; }
+        public string VisitorLogin { get; set; }
         override
         public string ToString()
         {

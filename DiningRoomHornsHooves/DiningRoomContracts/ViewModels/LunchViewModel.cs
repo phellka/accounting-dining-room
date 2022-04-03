@@ -17,7 +17,7 @@ namespace DiningRoomContracts.ViewModels
         public int Weight { get; set; }
         [DisplayName("Дата обеда")]
         public DateTime Date { get; set; }
-        public string WorkerLogin { get; set; }
+        public string VisitorLogin { get; set; }
         public Dictionary<int, int> LunchOrders { get; set; }
         public Dictionary<int, int> LunchProduts { get; set; }
         override

@@ -4,14 +4,16 @@ using DiningRoomDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DiningRoomDatabaseImplement.Migrations
 {
     [DbContext(typeof(DiningRoomDatabase))]
-    partial class DiningRoomDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220403073609_RenameStorekeeperToManager")]
+    partial class RenameStorekeeperToManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,14 +59,14 @@ namespace DiningRoomDatabaseImplement.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("VisitorLogin")
+                    b.Property<string>("WorkerLogin")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("VisitorLogin");
+                    b.HasIndex("WorkerLogin");
 
                     b.ToTable("Cutleries");
                 });
@@ -82,15 +84,15 @@ namespace DiningRoomDatabaseImplement.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("VisitorLogin")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
+                    b.Property<string>("WorkerLogin")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("VisitorLogin");
+                    b.HasIndex("WorkerLogin");
 
                     b.ToTable("Lunches");
                 });
@@ -156,7 +158,7 @@ namespace DiningRoomDatabaseImplement.Migrations
 
                     b.HasKey("Login");
 
-                    b.ToTable("Managers");
+                    b.ToTable("Storekeepers");
                 });
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Order", b =>
@@ -169,16 +171,16 @@ namespace DiningRoomDatabaseImplement.Migrations
                     b.Property<int>("Calorie")
                         .HasColumnType("int");
 
-                    b.Property<string>("VisitorLogin")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Wishes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WorkerLogin")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("VisitorLogin");
+                    b.HasIndex("WorkerLogin");
 
                     b.ToTable("Orders");
                 });
@@ -234,7 +236,7 @@ namespace DiningRoomDatabaseImplement.Migrations
                     b.ToTable("ProductCooks");
                 });
 
-            modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Visitor", b =>
+            modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Worker", b =>
                 {
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(450)");
@@ -253,7 +255,7 @@ namespace DiningRoomDatabaseImplement.Migrations
 
                     b.HasKey("Login");
 
-                    b.ToTable("Visitors");
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Cook", b =>
@@ -273,22 +275,22 @@ namespace DiningRoomDatabaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiningRoomDatabaseImplement.Models.Visitor", "Visitor")
+                    b.HasOne("DiningRoomDatabaseImplement.Models.Worker", "Worker")
                         .WithMany("Cutleries")
-                        .HasForeignKey("VisitorLogin");
+                        .HasForeignKey("WorkerLogin");
 
                     b.Navigation("Order");
 
-                    b.Navigation("Visitor");
+                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Lunch", b =>
                 {
-                    b.HasOne("DiningRoomDatabaseImplement.Models.Visitor", "Visitor")
+                    b.HasOne("DiningRoomDatabaseImplement.Models.Worker", "Worker")
                         .WithMany("Lunches")
-                        .HasForeignKey("VisitorLogin");
+                        .HasForeignKey("WorkerLogin");
 
-                    b.Navigation("Visitor");
+                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.LunchOrders", b =>
@@ -331,11 +333,11 @@ namespace DiningRoomDatabaseImplement.Migrations
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("DiningRoomDatabaseImplement.Models.Visitor", "Visitor")
+                    b.HasOne("DiningRoomDatabaseImplement.Models.Worker", "Worker")
                         .WithMany("Orders")
-                        .HasForeignKey("VisitorLogin");
+                        .HasForeignKey("WorkerLogin");
 
-                    b.Navigation("Visitor");
+                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Product", b =>
@@ -397,7 +399,7 @@ namespace DiningRoomDatabaseImplement.Migrations
                     b.Navigation("ProductCooks");
                 });
 
-            modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Visitor", b =>
+            modelBuilder.Entity("DiningRoomDatabaseImplement.Models.Worker", b =>
                 {
                     b.Navigation("Cutleries");
 
