@@ -25,7 +25,9 @@ namespace DiningRoomDatabaseImplement.Implements
                 return null;
             }
             using var context = new DiningRoomDatabase();
-            return context.Cooks.Where(rec => rec.Name.Contains(model.Name)).Select(CreateModel).ToList();
+            return context.Cooks.Where(rec => 
+                !String.IsNullOrEmpty(model.ManagerLogin) && rec.ManagerLogin == model.ManagerLogin)
+                .Select(CreateModel).ToList();
         }
         public CookViewModel GetElement(CookBindingModel model)
         {
@@ -37,11 +39,10 @@ namespace DiningRoomDatabaseImplement.Implements
             var cook = context.Cooks.FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
             return cook != null ? CreateModel(cook) : null;
         }
-        public void Insert()
+        public void Insert(CookBindingModel model)
         {
             using var context = new DiningRoomDatabase();
-            string newName = GenerateName();
-            context.Cooks.Add(new Cook { Name = newName, ManagerLogin = "SystemStorekeeper"});
+            context.Cooks.Add(new Cook { Name = model.Name, ManagerLogin = model.ManagerLogin});
             context.SaveChanges();
         }
         private static CookViewModel CreateModel(Cook cook)
@@ -53,25 +54,6 @@ namespace DiningRoomDatabaseImplement.Implements
                 ManagerLogin = cook.ManagerLogin
             };
         }
-        public static string GenerateName()
-        {
-            Random r = new Random();
-            int len = r.Next(2) + 2;
-            len *= 2;
-            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
-            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
-            string Name = "";
-            Name += consonants[r.Next(consonants.Length)].ToUpper();
-            Name += vowels[r.Next(vowels.Length)];
-            int b = 2;
-            while (b < len)
-            {
-                Name += consonants[r.Next(consonants.Length)];
-                b++;
-                Name += vowels[r.Next(vowels.Length)];
-                b++;
-            }
-            return Name;
-        }
+        
     }
 }

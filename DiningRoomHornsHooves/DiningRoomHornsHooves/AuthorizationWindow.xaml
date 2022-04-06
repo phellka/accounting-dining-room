@@ -23,9 +23,9 @@
                 <TextBox Name="LoginTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 10, 10, 10" VerticalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5">Пароль:</TextBlock>
                 <PasswordBox Name="PasswordTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 10, 10, 10" VerticalContentAlignment="Center"></PasswordBox>
-                <Button Grid.Row="2" Grid.Column="0" Click="AutorizedClick" Margin="10" Style="{StaticResource NewGameButtonStyle}">Войти</Button>
-                <Button Grid.Row="2" Grid.Column="1" Click="CancelClick" Margin="0, 10, 10, 10" Style="{StaticResource NewGameButtonStyle}">Отмена</Button>
-                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="RegistrationClick" Margin="20, 10, 20, 10" Style="{StaticResource NewGameButtonStyle}">Регистрация</Button>
+                <Button Grid.Row="2" Grid.Column="0" Margin="10" Style="{StaticResource NewGameButtonStyle}" Click="AutorizedClick">Войти</Button>
+                <Button Grid.Row="2" Grid.Column="1" Margin="0, 10, 10, 10" Style="{StaticResource NewGameButtonStyle}" Click="CancelClick">Отмена</Button>
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="20, 10, 20, 10" Style="{StaticResource NewGameButtonStyle}" Click="RegistrationClick">Регистрация</Button>
             </Grid>
         </Border>
     </Grid>

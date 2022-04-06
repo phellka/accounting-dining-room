@@ -13,7 +13,6 @@ namespace DiningRoomDatabaseImplement.Implements
 {
     public class VisitorStorage : IVisitorStorage
     {
-        public static string AutorizedWorker;
         public bool Registered(VisitorBindingModel model)
         {
             using var context = new DiningRoomDatabase();
@@ -43,12 +42,7 @@ namespace DiningRoomDatabaseImplement.Implements
             {
                 return false;
             }
-            AutorizedWorker = model.Login;
             return true;
-        }
-        public VisitorBindingModel GetAutorizedWorker()
-        {
-            return GetElement(new VisitorBindingModel() { Login = AutorizedWorker });
         }
         public VisitorBindingModel GetElement(VisitorBindingModel model)
         {

@@ -10,7 +10,6 @@ namespace DiningRoomContracts.StoragesContracts
 {
     public interface IVisitorStorage
     {
-        VisitorBindingModel GetAutorizedWorker();
         bool Registered(VisitorBindingModel model);
         void Insert(VisitorBindingModel model);
         bool Login(VisitorBindingModel model);

@@ -34,7 +34,7 @@ namespace DiningRoomHornsHooves
         }
         private void OrderWindowLoad(object sender, RoutedEventArgs e)
         {
-            var list = orderLogic.Read(null);
+            var list = orderLogic.Read(new OrderBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             OrdersComboBox.ItemsSource = list;
             OrdersComboBox.SelectedItem = null;
             //OrdersComboBox.DisplayMemberPath = "Calorie";
@@ -42,7 +42,7 @@ namespace DiningRoomHornsHooves
             {
                 try
                 {
-                    var view = cutleryLogic.Read(new CutleryBindingModel { Id = id })?[0];
+                    var view = cutleryLogic.Read(new CutleryBindingModel { Id = id, VisitorLogin = AuthorizationWindow.AutorizedVisitor })?[0];
                     if (view != null)
                     {
                         NameBox.Text = view.Name;
@@ -80,7 +80,8 @@ namespace DiningRoomHornsHooves
             string name = NameBox.Text;
             int count = Convert.ToInt32(CountBox.Text);
             cutleryLogic.CreateOrUpdate(new CutleryBindingModel { Id = id, Name = name, 
-                Count = count, CulteryOrder = ((OrderViewModel)OrdersComboBox.SelectedItem).Id});
+                Count = count, CulteryOrder = ((OrderViewModel)OrdersComboBox.SelectedItem).Id,
+                VisitorLogin = AuthorizationWindow.AutorizedVisitor});
             this.Close();
         }
     }

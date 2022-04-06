@@ -41,7 +41,8 @@ namespace DiningRoomBusinessLogic.BusinessLogics
             var lunches = lunchStorage.GetFilteredList(new LunchBindingModel
             {
                 after = model.DateAfter,
-                before = model.DateBefore
+                before = model.DateBefore,
+                VisitorLogin = model.VisitorLogin
             });
             foreach (var lunch in lunches)
             {
@@ -61,7 +62,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
                 }
                 record.Cooks = listCookIds.Distinct().ToList().Select(rec => cookStorage.GetElement(new CookBindingModel { Id = rec })).ToList();
                 var lunchOrders = lunch.LunchOrders.Keys.ToList();
-                var lunchCutleries = cutleryStorage.GetFullList().Where(rec => lunchOrders.Contains(rec.CulteryOrder)).ToList();
+                var lunchCutleries = cutleryStorage.GetFilteredList(new CutleryBindingModel { VisitorLogin = model.VisitorLogin}).Where(rec => lunchOrders.Contains(rec.CulteryOrder)).ToList();
                 record.Cutleries = lunchCutleries;
                 list.Add(record);
             }
@@ -69,7 +70,6 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         }
         public void saveLunchesToPdfFile(ReportBindingModel model)
         {
-            var worker = workerStorage.GetAutorizedWorker();
             saveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,

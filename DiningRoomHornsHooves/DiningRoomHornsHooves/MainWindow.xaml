@@ -19,5 +19,6 @@
                 <MenuItem Header="Привязать поваров" Click="CreateProductCooksClick"></MenuItem>
             </MenuItem>
         </Menu>
+        <Image Source="Images/w1500_1377754.jpg" Margin="30"></Image>
     </Grid>
 </Window>

@@ -43,13 +43,14 @@ namespace DiningRoomHornsHooves
             {
                 try
                 {
-                    var view = lunchLogic.Read(new LunchBindingModel { Id = id })?[0];
+                    var view = lunchLogic.Read(new LunchBindingModel { Id = id, VisitorLogin = AuthorizationWindow.AutorizedVisitor })?[0];
                     if (view != null)
                     {
                         PriceBox.Text = view.Price.ToString();
                         WeightBox.Text = view.Weight.ToString();
                         DatePicker.SelectedDate = view.Date;
-                        var selectedList = productLogic.Read(null).Where(rec => view.LunchProduts.ContainsKey(rec.Id));
+                        var selectedList = productLogic.Read(null)
+                            .Where(rec => view.LunchProduts.ContainsKey(rec.Id));
                         if (view.LunchProduts.Count != 0)
                         {
                             CountBox.Text = view.LunchProduts.First().Value.ToString();
@@ -115,7 +116,8 @@ namespace DiningRoomHornsHooves
                 Price = price,
                 Weight = weight,
                 Date = date,
-                LunchProduts = lunchProducts
+                LunchProduts = lunchProducts,
+                VisitorLogin = AuthorizationWindow.AutorizedVisitor
             });
             this.Close();
         }

@@ -42,7 +42,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         }
         public void Delete(CutleryBindingModel model)
         {
-            var element = cutleryStorage.GetElement(new CutleryBindingModel { Id = model.Id });
+            var element = cutleryStorage.GetElement(model);
             if (element == null)
             {
                 throw new Exception("Элмент не найден");

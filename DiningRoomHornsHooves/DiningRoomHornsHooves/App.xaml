@@ -111,5 +111,22 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="Button" x:Key="bigButton">
+            <Setter Property="Height" Value="47"/>
+            <Style.Triggers>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Red" AutoReverse="True" Duration="0:0:2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <SoundPlayerAction Source="Audio/click.wav"></SoundPlayerAction>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
     </Application.Resources>
 </Application>

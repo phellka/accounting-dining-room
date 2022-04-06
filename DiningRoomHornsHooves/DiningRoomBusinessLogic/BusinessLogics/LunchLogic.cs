@@ -44,21 +44,21 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         }
         public void Delete(LunchBindingModel model)
         {
-            var element = lunchStorage.GetElement(new LunchBindingModel { Id = model.Id });
+            var element = lunchStorage.GetElement(model);
             if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
             lunchStorage.Delete(model);
         }
-        public void AddOrder((int, (int, int)) addedOrder)
+        public void AddOrder(AddLunchOrderBindingModel addedOrder)
         {
-            var lunch = lunchStorage.GetElement(new LunchBindingModel { Id = addedOrder.Item1 });
+            var lunch = lunchStorage.GetElement(new LunchBindingModel { Id = addedOrder.LunchId, VisitorLogin = addedOrder.VisitorLogin });
             if (lunch == null)
             {
                 throw new Exception("Обед не найден");
             }
-            var order = orderStorage.GetElement(new OrderBindingModel { Id = addedOrder.Item2.Item1 });
+            var order = orderStorage.GetElement(new OrderBindingModel { Id = addedOrder.OrderId, VisitorLogin = addedOrder.VisitorLogin });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");

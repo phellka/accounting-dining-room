@@ -36,7 +36,7 @@ namespace DiningRoomHornsHooves
             {
                 try
                 {
-                    var view = orderLogic.Read(new OrderBindingModel { Id = id })?[0];
+                    var view = orderLogic.Read(new OrderBindingModel { Id = id, VisitorLogin = AuthorizationWindow.AutorizedVisitor })?[0];
                     if (view != null)
                     {
                         CaloriesBox.Text = view.Calorie.ToString();
@@ -62,7 +62,7 @@ namespace DiningRoomHornsHooves
             }
             int calories = Convert.ToInt32(CaloriesBox.Text);
             string wishes = WishesBox.Text;
-            orderLogic.CreateOrUpdate(new OrderBindingModel { Id = id, Calorie = calories, Wishes = wishes });
+            orderLogic.CreateOrUpdate(new OrderBindingModel { Id = id, Calorie = calories, Wishes = wishes, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             this.Close();
         }
     }

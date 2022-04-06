@@ -16,6 +16,6 @@ namespace DiningRoomContracts.StoragesContracts
         void Insert(LunchBindingModel model);
         void Update(LunchBindingModel model);
         void Delete(LunchBindingModel model);
-        void AddOrder((int, (int, int)) addedOrder);
+        void AddOrder(AddLunchOrderBindingModel addedOrder);
     }
 }

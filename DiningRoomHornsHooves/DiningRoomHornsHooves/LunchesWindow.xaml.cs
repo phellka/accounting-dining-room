@@ -33,7 +33,7 @@ namespace DiningRoomHornsHooves
         }
         private void LoadData()
         {
-            var list = lunchLogic.Read(null);
+            var list = lunchLogic.Read(new LunchBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             if (list != null)
             {
                 LunchesData.ItemsSource = list;
@@ -65,7 +65,7 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedLunchId = ((LunchViewModel)LunchesData.SelectedItem).Id;
-            lunchLogic.Delete(new LunchBindingModel { Id = selecctedLunchId });
+            lunchLogic.Delete(new LunchBindingModel { Id = selecctedLunchId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             LoadData();
         }
         private void UpdateCutleryClick(object sender, RoutedEventArgs e)

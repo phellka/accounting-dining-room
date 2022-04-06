@@ -71,7 +71,8 @@ namespace DiningRoomHornsHooves
                 {
                     DateAfter = DatePickerAfter.SelectedDate,
                     DateBefore = DatePickerBefore.SelectedDate,
-                    FileName = dialog.FileName
+                    FileName = dialog.FileName,
+                    VisitorLogin = AuthorizationWindow.AutorizedVisitor
                 });
             }
         }
@@ -87,7 +88,8 @@ namespace DiningRoomHornsHooves
             {
                 var dict = reportLogic.GetLunchesPCView(new ReportBindingModel() { 
                     DateAfter = DatePickerAfter.SelectedDate,
-                    DateBefore = DatePickerBefore.SelectedDate
+                    DateBefore = DatePickerBefore.SelectedDate,
+                    VisitorLogin = AuthorizationWindow.AutorizedVisitor
                 });
                 if (dict != null)
                 {

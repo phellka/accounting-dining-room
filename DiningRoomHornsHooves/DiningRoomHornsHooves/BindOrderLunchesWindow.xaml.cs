@@ -32,13 +32,13 @@ namespace DiningRoomHornsHooves
         }
         private void LoadData()
         {
-            var listLunch = lunchLogic.Read(null);
+            var listLunch = lunchLogic.Read(new LunchBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             if (listLunch != null)
             {
                 LunchesListBox.ItemsSource = listLunch;
                 LunchesListBox.SelectedItem = null;
             }
-            var listOrder = orderLogic.Read(null);
+            var listOrder = orderLogic.Read(new OrderBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             if (listLunch != null)
             {
                 OrdersListBox.ItemsSource = listOrder;
@@ -73,7 +73,13 @@ namespace DiningRoomHornsHooves
             int orderId = ((OrderViewModel)OrdersListBox.SelectedItem).Id;
             foreach(LunchViewModel i in LunchesListBox.SelectedItems)
             {
-                lunchLogic.AddOrder((i.Id, (orderId, Convert.ToInt32(CountBox.Text))));
+                lunchLogic.AddOrder(new AddLunchOrderBindingModel
+                {
+                    LunchId = i.Id,
+                    OrderId = orderId,
+                    OrderCount = Convert.ToInt32(CountBox.Text),
+                    VisitorLogin = AuthorizationWindow.AutorizedVisitor
+                });
             }
             MessageBox.Show("Привязка создана");
         }

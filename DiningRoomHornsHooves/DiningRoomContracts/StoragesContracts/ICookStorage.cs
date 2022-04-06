@@ -13,6 +13,6 @@ namespace DiningRoomContracts.StoragesContracts
         List<CookViewModel> GetFullList();
         List<CookViewModel> GetFilteredList(CookBindingModel model);
         CookViewModel GetElement(CookBindingModel model);
-        void Insert();
+        void Insert(CookBindingModel model);
     }
 }

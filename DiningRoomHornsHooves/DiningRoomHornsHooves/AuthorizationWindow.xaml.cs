@@ -24,6 +24,7 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        public static string AutorizedVisitor { get; private set; }
         private readonly IVisitorLogic workerLogic;
         public AuthorizationWindow(IVisitorLogic workerLogic)
         {
@@ -50,6 +51,7 @@ namespace DiningRoomHornsHooves
             }
             if (workerLogic.Login(new VisitorBindingModel { Login = login, Password = password}))
             {
+                AutorizedVisitor = login;
                 MainWindow mainWindow = App.Container.Resolve<MainWindow>();
                 mainWindow.Show();
                 this.Close();

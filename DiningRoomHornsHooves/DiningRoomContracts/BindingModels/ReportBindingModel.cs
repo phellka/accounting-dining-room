@@ -13,5 +13,6 @@ namespace DiningRoomContracts.BindingModels
         public DateTime? DateAfter { get; set; }
         public DateTime? DateBefore { get; set; }
         public List<LunchViewModel>? lunches { get; set; }
+        public String VisitorLogin { get; set; }
     }
 }

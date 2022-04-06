@@ -24,12 +24,12 @@ namespace DiningRoomHornsHooves
     /// </summary>
     public partial class ReportCooksByLanchesWindow : Window
     {
-        private readonly ILunchStorage lunchStorage;
+        private readonly ILunchLogic lunchLogic;
         private readonly IReportLogic reportLogic;
-        public ReportCooksByLanchesWindow(ILunchStorage lunchStorage, IReportLogic reportLogic)
+        public ReportCooksByLanchesWindow(ILunchLogic lunchLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
-            this.lunchStorage = lunchStorage;
+            this.lunchLogic = lunchLogic;
             this.reportLogic = reportLogic;
         }
         private void CancelClick(object sender, RoutedEventArgs e)
@@ -38,7 +38,7 @@ namespace DiningRoomHornsHooves
         }
         private void LoadData()
         {
-            var list = lunchStorage.GetFullList();
+            var list = lunchLogic.Read(new LunchBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             if (list != null)
             {
                 LunchesListBox.ItemsSource = list;
@@ -57,7 +57,7 @@ namespace DiningRoomHornsHooves
                 var dialog = new SaveFileDialog();
                 dialog.Filter = "xlsx|*.xlsx";
                 if (dialog.ShowDialog() == true) {
-                    reportLogic.saveCooksToExcel(new ReportBindingModel() { FileName = dialog.FileName, lunches = list});
+                    reportLogic.saveCooksToExcel(new ReportBindingModel() { FileName = dialog.FileName, lunches = list, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
                 }
                 MessageBox.Show("Файл успешно сохранен");
             }
@@ -75,7 +75,7 @@ namespace DiningRoomHornsHooves
                 dialog.Filter = "docx|*.docx";
                 if (dialog.ShowDialog() == true)
                 {
-                    reportLogic.saveCooksToWord(new ReportBindingModel() { FileName = dialog.FileName, lunches = list });
+                    reportLogic.saveCooksToWord(new ReportBindingModel() { FileName = dialog.FileName, lunches = list, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
                 }
                 MessageBox.Show("Файл успешно сохранен");
             }

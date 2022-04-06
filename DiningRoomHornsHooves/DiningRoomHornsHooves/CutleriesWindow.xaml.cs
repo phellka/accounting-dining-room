@@ -31,7 +31,7 @@ namespace DiningRoomHornsHooves
         }
         private void LoadData()
         {
-            var list = cutleryLogic.Read(null);
+            var list = cutleryLogic.Read(new CutleryBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor});
             if (list != null)
             {
                 CutleriesData.ItemsSource = list;
@@ -61,7 +61,7 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedCutleryId = ((CutleryViewModel)CutleriesData.SelectedItem).Id;
-            cutleryLogic.Delete(new CutleryBindingModel { Id = selecctedCutleryId });
+            cutleryLogic.Delete(new CutleryBindingModel { Id = selecctedCutleryId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             LoadData();
         }
         private void UpdateCutleryClick(object sender, RoutedEventArgs e)

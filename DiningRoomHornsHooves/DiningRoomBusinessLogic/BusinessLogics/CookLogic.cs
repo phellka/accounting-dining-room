@@ -29,9 +29,30 @@ namespace DiningRoomBusinessLogic.BusinessLogics
             }
             return cookStorage.GetFilteredList(model);
         }
+        public static string GenerateName()
+        {
+            Random r = new Random();
+            int len = r.Next(2) + 2;
+            len *= 2;
+            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+            string Name = "";
+            Name += consonants[r.Next(consonants.Length)].ToUpper();
+            Name += vowels[r.Next(vowels.Length)];
+            int b = 2;
+            while (b < len)
+            {
+                Name += consonants[r.Next(consonants.Length)];
+                b++;
+                Name += vowels[r.Next(vowels.Length)];
+                b++;
+            }
+            return Name;
+        }
         public void Create()
         {
-            cookStorage.Insert();
+            string newName = GenerateName();
+            cookStorage.Insert(new CookBindingModel { Name = newName, ManagerLogin = "SystemStorekeeper" });
         }
     }
 }

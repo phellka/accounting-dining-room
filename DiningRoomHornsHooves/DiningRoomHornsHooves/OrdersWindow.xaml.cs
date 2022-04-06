@@ -32,7 +32,7 @@ namespace DiningRoomHornsHooves
         }
         private void LoadData()
         {
-            var list = orderLogic.Read(null);
+            var list = orderLogic.Read(new OrderBindingModel { VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             if (list != null)
             {
                 OrdersData.ItemsSource = list;
@@ -61,7 +61,7 @@ namespace DiningRoomHornsHooves
                 return;
             }
             int selecctedOrderId = ((OrderViewModel)OrdersData.SelectedItem).Id;
-            orderLogic.Delete(new OrderBindingModel { Id = selecctedOrderId});
+            orderLogic.Delete(new OrderBindingModel { Id = selecctedOrderId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
             LoadData();
         }
         private void UpdateOrderClick(object sender, RoutedEventArgs e)

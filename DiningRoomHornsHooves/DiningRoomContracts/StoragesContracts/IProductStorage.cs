@@ -13,7 +13,7 @@ namespace DiningRoomContracts.StoragesContracts
         List<ProductViewModel> GetFullList();
         List<ProductViewModel> GetFilteredList(ProductBindingModel model);
         ProductViewModel GetElement(ProductBindingModel model);
-        void Insert();
-        void AddCooks();
+        void Insert(ProductBindingModel model);
+        void AddCooks(AddedProductCooksBindingModel addedProductCooks);
     }
 }

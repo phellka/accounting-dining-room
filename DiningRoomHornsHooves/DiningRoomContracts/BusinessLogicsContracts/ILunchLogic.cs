@@ -13,6 +13,6 @@ namespace DiningRoomContracts.BusinessLogicsContracts
         List<LunchViewModel> Read(LunchBindingModel model);
         void CreateOrUpdate(LunchBindingModel model);
         void Delete(LunchBindingModel model);
-        void AddOrder((int, (int, int)) addedOrder);
+        void AddOrder(AddLunchOrderBindingModel addedOrder);
     }
 }

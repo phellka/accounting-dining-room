@@ -42,7 +42,7 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         }
         public void Delete(OrderBindingModel model)
         {
-            var element = orderStorage.GetElement(new OrderBindingModel { Id = model.Id });
+            var element = orderStorage.GetElement(model);
             if (element == null)
             {
                 throw new Exception("Элмент не найден");
