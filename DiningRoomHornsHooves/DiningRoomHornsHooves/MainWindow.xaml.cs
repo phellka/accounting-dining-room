@@ -12,9 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
+using System.Configuration;
+using Unity.Lifetime;
 using DiningRoomBusinessLogic.OfficePackage.Implements;
 using DiningRoomContracts.BusinessLogicsContracts;
-using Unity;
+using DiningRoomBusinessLogic.MailWorker;
+using DiningRoomContracts.BindingModels;
 
 namespace DiningRoomHornsHooves
 {
@@ -30,6 +34,17 @@ namespace DiningRoomHornsHooves
             InitializeComponent();
             this.cookLogic = cookLogic;
             this.productLogic = productLogic;
+
+            var mailSender = new MailKitWorker();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+                SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                PopHost = ConfigurationManager.AppSettings["PopHost"],
+                PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"])
+            });
         }
         private void CreateCookClick(object sender, RoutedEventArgs e)
         {

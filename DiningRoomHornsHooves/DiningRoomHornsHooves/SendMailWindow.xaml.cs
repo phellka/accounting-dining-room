@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using DiningRoomContracts.BusinessLogicsContracts;
 using DiningRoomContracts.BindingModels;
+using DiningRoomBusinessLogic.MailWorker;
 
 namespace DiningRoomHornsHooves
 {
@@ -24,6 +25,7 @@ namespace DiningRoomHornsHooves
     {
         private readonly IReportLogic reportLogic;
         private readonly IVisitorLogic visitorLogic;
+        private readonly MailKitWorker mailKitWorker;
         public DateTime DateAfter { get; set; }
         public DateTime DateBefore { get; set; }
         public SendMailWindow(IReportLogic reportLogic, IVisitorLogic visitorLogic)
@@ -31,6 +33,7 @@ namespace DiningRoomHornsHooves
             InitializeComponent();
             this.reportLogic = reportLogic;
             this.visitorLogic = visitorLogic;
+            mailKitWorker = new MailKitWorker();
         }
         private void SendMailWindowLoad(object sender, RoutedEventArgs e)
         {
@@ -38,7 +41,6 @@ namespace DiningRoomHornsHooves
         }
         private void SendMessageClick(object sender, RoutedEventArgs e)
         {
-
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(MailAdressBox.Text);
             if (!match.Success)
@@ -46,14 +48,28 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Данные введенные в поле \"Адрес почты\" должны соответствовать адресу электронной почте");
                 return;
             }
-            reportLogic.saveLunchesToPdfFile(new ReportBindingModel()
+            try
             {
-                DateAfter = DateAfter,
-                DateBefore = DateBefore,
-                FileName = "reportOrdersByDate.pdf",
-                VisitorLogin = AuthorizationWindow.AutorizedVisitor
-            });
-            MessageBox.Show("Письмо успешно отправлено");
+                reportLogic.saveLunchesToPdfFile(new ReportBindingModel()
+                {
+                    DateAfter = DateAfter,
+                    DateBefore = DateBefore,
+                    FileName = "reportOrdersByDate.pdf",
+                    VisitorLogin = AuthorizationWindow.AutorizedVisitor
+                });
+                mailKitWorker.MailSendAsync(new MailSendInfoBindingModel
+                {
+                    MailAddress = MailAdressBox.Text,
+                    Subject = "Отчет",
+                    Text = "Отчет по заказам в промежутке дат",
+                    FileAttachment = "reportOrdersByDate.pdf"
+                });
+                MessageBox.Show("Письмо успешно отправлено");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
             Close();
         }
     }

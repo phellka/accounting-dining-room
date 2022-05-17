@@ -13,6 +13,7 @@ using DiningRoomDatabaseImplement.Implements;
 using DiningRoomBusinessLogic.BusinessLogics;
 using DiningRoomBusinessLogic.OfficePackage;
 using DiningRoomBusinessLogic.OfficePackage.Implements;
+using DiningRoomBusinessLogic.MailWorker;
 
 namespace DiningRoomHornsHooves
 {
