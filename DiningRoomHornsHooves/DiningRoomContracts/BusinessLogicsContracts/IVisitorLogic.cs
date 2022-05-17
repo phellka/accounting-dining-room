@@ -12,5 +12,6 @@ namespace DiningRoomContracts.BusinessLogicsContracts
     {
         void Create(VisitorBindingModel model);
         bool Login(VisitorBindingModel model);
+        VisitorBindingModel GetVisitorData(VisitorBindingModel model);
     }
 }

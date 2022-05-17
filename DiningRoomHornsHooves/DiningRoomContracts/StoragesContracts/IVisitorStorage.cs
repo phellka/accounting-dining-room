@@ -13,5 +13,6 @@ namespace DiningRoomContracts.StoragesContracts
         bool Registered(VisitorBindingModel model);
         void Insert(VisitorBindingModel model);
         bool Login(VisitorBindingModel model);
+        VisitorBindingModel GetVisitorData(VisitorBindingModel model);
     }
 }

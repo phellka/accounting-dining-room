@@ -44,6 +44,12 @@ namespace DiningRoomDatabaseImplement.Implements
             }
             return true;
         }
+        public VisitorBindingModel GetVisitorData(VisitorBindingModel model)
+        {
+            var visitor = GetElement(model);
+            visitor.Password = "";
+            return visitor;
+        }
         public VisitorBindingModel GetElement(VisitorBindingModel model)
         {
             if (model == null)

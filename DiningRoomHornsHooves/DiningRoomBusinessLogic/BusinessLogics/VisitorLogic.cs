@@ -32,5 +32,9 @@ namespace DiningRoomBusinessLogic.BusinessLogics
         {
             return workerStorage.Login(model);
         }
+        public VisitorBindingModel GetVisitorData(VisitorBindingModel model)
+        {
+            return workerStorage.GetVisitorData(model);
+        }
     }
 }

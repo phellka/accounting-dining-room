@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using DiningRoomContracts.BusinessLogicsContracts;
 using DiningRoomContracts.BindingModels;
+using Unity;
 
 namespace DiningRoomHornsHooves
 {
@@ -63,18 +64,16 @@ namespace DiningRoomHornsHooves
         }
         private void SendMessageClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new SaveFileDialog();
-            dialog.Filter = "pdf|*.pdf";
-            if (dialog.ShowDialog() == true)
+            if (DatePickerAfter.SelectedDate == null || DatePickerBefore.SelectedDate == null ||
+                DatePickerAfter.SelectedDate >= DatePickerBefore.SelectedDate)
             {
-                reportLogic.saveLunchesToPdfFile(new ReportBindingModel()
-                {
-                    DateAfter = DatePickerAfter.SelectedDate,
-                    DateBefore = DatePickerBefore.SelectedDate,
-                    FileName = dialog.FileName,
-                    VisitorLogin = AuthorizationWindow.AutorizedVisitor
-                });
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка");
+                return;
             }
+            SendMailWindow sendMailWindow = App.Container.Resolve<SendMailWindow>();
+            sendMailWindow.DateAfter = DatePickerAfter.SelectedDate.Value;
+            sendMailWindow.DateBefore = DatePickerBefore.SelectedDate.Value;
+            sendMailWindow.ShowDialog();
         }
         private void ShowClick(object sender, RoutedEventArgs e)
         {

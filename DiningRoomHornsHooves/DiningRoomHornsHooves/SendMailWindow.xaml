@@ -1,0 +1,22 @@
+﻿<Window x:Class="DiningRoomHornsHooves.SendMailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiningRoomHornsHooves"
+        mc:Ignorable="d"
+        Title="Отправка письма" Height="150" Width="400" MinHeight="150" MinWidth="400" Loaded="SendMailWindowLoad" Background="CadetBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Адрес почты:</TextBlock>
+        <TextBox Name="MailAdressBox" Grid.Column="1" Grid.Row="0" Margin="10" VerticalContentAlignment="Center"></TextBox>
+        <Button Name="SendMail" Grid.Column="0" Grid.Row="1" Margin="10" Click="SendMessageClick">Отправить</Button>
+    </Grid>
+</Window>
