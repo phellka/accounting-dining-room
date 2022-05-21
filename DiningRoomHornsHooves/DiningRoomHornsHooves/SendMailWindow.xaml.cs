@@ -60,8 +60,8 @@ namespace DiningRoomHornsHooves
                 mailKitWorker.MailSendAsync(new MailSendInfoBindingModel
                 {
                     MailAddress = MailAdressBox.Text,
-                    Subject = "Отчет",
-                    Text = "Отчет по заказам в промежутке дат",
+                    Subject = "Отчет. Столовая \"Рога и копыта\"",
+                    Text = "Отчет по заказам в промежутке дат от " + DateAfter.ToShortDateString() + " до " + DateBefore.ToShortDateString(),
                     FileAttachment = "reportOrdersByDate.pdf"
                 });
                 MessageBox.Show("Письмо успешно отправлено");
