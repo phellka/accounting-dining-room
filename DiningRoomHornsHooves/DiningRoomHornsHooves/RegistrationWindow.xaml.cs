@@ -48,6 +48,11 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Поля \"имя\" и \"Email\" - обязательны к заполнению");
                 return;
             }
+            if (password.Length < 5)
+            {
+                MessageBox.Show("Минимальная длина пароля 5 символов");
+                return;
+            }
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(email);
             if (!match.Success)
