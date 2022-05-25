@@ -60,9 +60,13 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Выберите приборы");
                 return;
             }
-            int selecctedCutleryId = ((CutleryViewModel)CutleriesData.SelectedItem).Id;
-            cutleryLogic.Delete(new CutleryBindingModel { Id = selecctedCutleryId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
-            LoadData();
+            MessageBoxResult result = MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                int selecctedCutleryId = ((CutleryViewModel)CutleriesData.SelectedItem).Id;
+                cutleryLogic.Delete(new CutleryBindingModel { Id = selecctedCutleryId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
+                LoadData();
+            }
         }
         private void UpdateCutleryClick(object sender, RoutedEventArgs e)
         {

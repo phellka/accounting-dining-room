@@ -64,9 +64,13 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Выберите обед");
                 return;
             }
-            int selecctedLunchId = ((LunchViewModel)LunchesData.SelectedItem).Id;
-            lunchLogic.Delete(new LunchBindingModel { Id = selecctedLunchId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
-            LoadData();
+            MessageBoxResult result = MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                int selecctedLunchId = ((LunchViewModel)LunchesData.SelectedItem).Id;
+                lunchLogic.Delete(new LunchBindingModel { Id = selecctedLunchId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
+                LoadData();
+            }
         }
         private void UpdateCutleryClick(object sender, RoutedEventArgs e)
         {

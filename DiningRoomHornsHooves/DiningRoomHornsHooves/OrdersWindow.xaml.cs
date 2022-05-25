@@ -60,9 +60,14 @@ namespace DiningRoomHornsHooves
                 MessageBox.Show("Выберите заказ");
                 return;
             }
-            int selecctedOrderId = ((OrderViewModel)OrdersData.SelectedItem).Id;
-            orderLogic.Delete(new OrderBindingModel { Id = selecctedOrderId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
-            LoadData();
+
+            MessageBoxResult result = MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                int selecctedOrderId = ((OrderViewModel)OrdersData.SelectedItem).Id;
+                orderLogic.Delete(new OrderBindingModel { Id = selecctedOrderId, VisitorLogin = AuthorizationWindow.AutorizedVisitor });
+                LoadData();
+            }
         }
         private void UpdateOrderClick(object sender, RoutedEventArgs e)
         {
